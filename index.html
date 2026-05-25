@@ -21223,7 +21223,7 @@ body{background:#0a1628;min-height:100vh;font-family:-apple-system,BlinkMacSyste
 
 /* 线索明细列表 */
 .lead-detail-list{max-height:320px;overflow-y:auto}
-.lead-detail-item{display:grid;grid-template-columns:100px 80px 60px 80px 1fr;gap:8px;padding:6px 8px;border-bottom:1px solid rgba(255,255,255,0.04);font-size:11px;align-items:center}
+.lead-detail-item{display:grid;grid-template-columns:65px 70px 70px 55px 65px 1fr;gap:8px;padding:6px 8px;border-bottom:1px solid rgba(255,255,255,0.04);font-size:11px;align-items:center}
 .lead-detail-item:hover{background:rgba(59,130,246,0.05)}
 .lead-detail-header{font-weight:600;color:#64748b;background:rgba(15,23,42,0.5);border-radius:6px 6px 0 0;position:sticky;top:0;z-index:1}
 .lead-detail-header:hover{background:rgba(15,23,42,0.5)}
@@ -22386,7 +22386,7 @@ function renderLeadsAll() {
   // 跨渠道行业对应表
   h += '<div style="font-size:12px;font-weight:600;color:#cbd5e1;margin:12px 0 6px">📊 三渠道行业分布对应表</div>';
   h += '<div class="lead-detail-list">';
-  h += '<div class="lead-detail-item lead-detail-header"><div>行业</div><div>AI拓展</div><div>自拓</div><div>商务</div><div>总计/成功率</div></div>';
+  h += '<div class="lead-detail-item lead-detail-header"><div>行业</div><div>全国体量</div><div>AI拓展</div><div>自拓</div><div>商务</div><div>总计/成功率</div></div>';
   var crossIndustry = [
     {name:'回收',ai:{t:37,s:5,f:19},self:{t:8,s:1,f:4},biz:{t:0,s:0,f:0}},
     {name:'洗护',ai:{t:25,s:1,f:22},self:{t:0,s:0,f:0},biz:{t:0,s:0,f:0}},
@@ -22403,8 +22403,12 @@ function renderLeadsAll() {
     var totalS = ind.ai.s+ind.self.s+ind.biz.s;
     var totalF = ind.ai.f+ind.self.f+ind.biz.f;
     var totalRate = totalT > 0 ? (totalS/totalT*100).toFixed(1) : '—';
+    // 全国体量（万家），与 renderIndustryTable 的 nationalVolume 保持一致
+    var volMap = {'回收':'—','洗护':'待调研','家装':'待调研','权益':'—','其他':'—','搬家':'—','京东':'—','家政':'302万+','洗车':'—'};
+    var vol = volMap[ind.name] || '待调研';
     h += '<div class="lead-detail-item">';
     h += '<div style="font-weight:600;color:#e2e8f0">' + ind.name + '</div>';
+    h += '<div style="color:#64748b;font-size:10px">' + vol + '</div>';
     h += '<div>' + ind.ai.t + '条<span class="lead-status ' + (ind.ai.s>0?'lead-status-success':ind.ai.t>0?'lead-status-fail':'') + '">' + (ind.ai.s>0?'✓'+ind.ai.s:ind.ai.t>0?'✗':'—') + '</span></div>';
     h += '<div>' + ind.self.t + '条<span class="lead-status ' + (ind.self.s>0?'lead-status-success':ind.self.t>0?'lead-status-fail':'') + '">' + (ind.self.s>0?'✓'+ind.self.s:ind.self.t>0?'✗':'—') + '</span></div>';
     h += '<div>' + ind.biz.t + '条<span class="lead-status ' + (ind.biz.s>0?'lead-status-success':ind.biz.t>0?'lead-status-fail':'') + '">' + (ind.biz.s>0?'✓'+ind.biz.s:ind.biz.t>0?'✗':'—') + '</span></div>';
