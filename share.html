@@ -21582,7 +21582,7 @@ body{background:#0a1628;min-height:100vh;font-family:-apple-system,BlinkMacSyste
     <div class="leads-panel" id="leads-panel">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
         <div style="font-size:14px;font-weight:600;color:#e2e8f0">🔗 行业拓展数据库</div>
-        <div style="font-size:11px;color:#64748b">数据来源：腾讯文档「拓展线索」 · 全国体量：天眼查/企查查2025-2026 · 更新时间：5.24</div>
+        <div style="font-size:11px;color:#64748b">数据来源：腾讯文档「拓展线索」 · 全国体量：天眼查/企查查2025-2026（排除夫妻店，仅统计有规模企业） · 更新时间：5.24</div>
       </div>
       <div class="leads-stats" id="leads-summary-stats">
         <div class="leads-stat"><div class="leads-stat-label">线索总量</div><div class="leads-stat-val" style="color:#e2e8f0">725</div><div class="leads-stat-label">AI+自拓+商务</div></div>
@@ -22404,7 +22404,7 @@ function renderLeadsAll() {
     var totalF = ind.ai.f+ind.self.f+ind.biz.f;
     var totalRate = totalT > 0 ? (totalS/totalT*100).toFixed(1) : '—';
     // 全国体量（万家），与 renderIndustryTable 的 nationalVolume 保持一致
-    var volMap = {'回收':'—','洗护':'待调研','家装':'待调研','权益':'—','其他':'—','搬家':'—','京东':'—','家政':'302万+','洗车':'—'};
+    var volMap = {'回收':'50万+','洗护':'5万+','家装':'200万+','权益':'—','其他':'—','搬家':'10万+','京东':'—','家政':'150万+','洗车':'30万+'};
     var vol = volMap[ind.name] || '待调研';
     h += '<div class="lead-detail-item">';
     h += '<div style="font-weight:600;color:#e2e8f0">' + ind.name + '</div>';
@@ -23647,10 +23647,11 @@ var industryExpanded = false;
 function renderIndustryTable() {
   // 全国体量数据（万家，来源：天眼查/企查查2025-2026年统计数据，排除夫妻店仅统计有规模企业）
   var nationalVolume = {
-    '采买类':'112万+','网站类':'78万+','家政类':'302万+','媒体类':'1129万+',
+    '采买类':'112万+','网站类':'78万+','家政类':'150万+','媒体类':'1129万+',
     '电商类':'2745万+','平台类':'350万+','跑腿类':'325万+','小程序':'78万+',
     '集采类':'180万+','政企类':'38万+',
-    '搬家类':'—','权益类':'—','维修类':'—','回收类':'—',
+    '搬家类':'10万+','回收类':'50万+',
+    '权益类':'—','维修类':'—',
     '物业类':'—','便民类':'—','物联类':'—','科技类':'—'
   };
   // 行业类别 → 渠道类型 一一映射
