@@ -400,6 +400,77 @@ body{background:#0a1628;min-height:100vh;font-family:-apple-system,BlinkMacSyste
 .ai-context-info{margin-top:14px;padding:12px;background:rgba(59,130,246,0.05);border:1px solid rgba(59,130,246,0.15);border-radius:8px;font-size:11px;color:#94a3b8;line-height:1.7}
 .ai-context-info b{color:#a5b4fc}
 
+/* ====== 移动端自适应 ====== */
+.mobile-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99;backdrop-filter:blur(2px)}
+.mobile-overlay.active{display:block}
+.mobile-hamburger{display:none;position:fixed;top:12px;left:12px;z-index:101;width:40px;height:40px;border-radius:10px;background:rgba(15,23,42,.95);border:1px solid rgba(255,255,255,.1);color:#60a5fa;font-size:18px;cursor:pointer;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.4);transition:background .2s}
+.mobile-hamburger:active{background:rgba(59,130,246,.2)}
+.sidebar.mobile-open{transform:translateX(0)!important;box-shadow:4px 0 20px rgba(0,0,0,.5)}
+.sidebar{transition:transform .3s ease,box-shadow .3s ease;transform:translateX(0)}
+
+@media(max-width:768px){
+  .mobile-hamburger{display:flex}
+  .main{margin-left:0!important;padding:60px 12px 20px!important}
+  .sidebar{position:fixed!important;top:0!important;left:0!important;width:280px!important;height:100vh!important;z-index:100;transform:translateX(-100%);box-shadow:none;border-right:1px solid rgba(255,255,255,.1);padding:16px 14px!important;overflow-y:auto}
+  .page-header{flex-direction:column;align-items:flex-start!important;gap:8px}
+  .page-title{font-size:16px!important}
+  .page-meta{font-size:10px!important}
+  .section{padding:14px 12px!important;margin-bottom:14px!important;border-radius:12px!important}
+  .section-hd{margin-bottom:12px!important;flex-wrap:wrap}
+  .section-title{font-size:13px!important}
+  .section-sub{font-size:10px!important;margin-left:0!important;margin-top:2px}
+  .goal-grid{grid-template-columns:1fr!important;gap:10px!important;margin-bottom:14px!important}
+  .goal-card{padding:14px 12px!important}
+  .gc-val{font-size:22px!important}
+  .kpi-row{grid-template-columns:repeat(2,1fr)!important;gap:8px!important}
+  .kpi-card{padding:10px 8px!important}
+  .kpi-val{font-size:18px!important}
+  .top10-grid{grid-template-columns:repeat(2,1fr)!important;gap:8px!important}
+  .chart-2col,.chart-3col{grid-template-columns:1fr!important;gap:10px!important}
+  .summary-grid{grid-template-columns:repeat(2,1fr)!important;gap:10px!important}
+  .sc-val{font-size:24px!important}
+  .week-grid{grid-template-columns:1fr!important}
+  .leads-stats{grid-template-columns:repeat(2,1fr)!important}
+  .leads-chart-row{grid-template-columns:1fr!important}
+  .tips-grid{grid-template-columns:1fr!important}
+  .lead-detail-list{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .lead-detail-item{min-width:500px;font-size:10px!important}
+  .rank-table-wrap,.top10-table-wrap,.table-scroll,.table-scroll-tall{overflow-x:auto;-webkit-overflow-scrolling:touch;font-size:11px!important}
+  .rank-table,.top10-table-wrap .data-table,.data-table{min-width:600px;font-size:11px!important}
+  .rank-table thead th,.data-table th,.data-table td,.top10-table-wrap .data-table thead th,.top10-table-wrap .data-table td{padding:7px 6px!important;font-size:10px!important}
+  .hr-table{min-width:500px;font-size:10px!important}
+  .hr-table th,.hr-table td{padding:5px 6px!important}
+  .ai-panel{margin:10px 0!important}
+  .ai-panel-header{padding:8px 12px!important}
+  .analysis-box{margin:10px 0!important;padding:10px 12px!important}
+  .issue-item,.strategy-item,.warn-item{font-size:11px!important;padding:6px 10px!important}
+  .active-filter-bar{font-size:11px!important;padding:6px 10px!important}
+  .ai-textarea{min-height:60px!important;font-size:11px!important}
+  .ai-result-box{max-height:calc(100vh - 300px)!important;font-size:11px!important}
+  .ai-quick-btns{gap:4px!important}
+  .ai-quick-btn{padding:5px 8px!important;font-size:10px!important}
+  .sb-logo{font-size:12px!important;margin-bottom:16px!important}
+  .sb-label{font-size:10px!important;margin-bottom:6px!important}
+  .sb-btn{padding:10px!important;font-size:12px!important;margin-bottom:4px!important}
+  .sb-date-input,.sb-select{padding:8px!important;font-size:11px!important}
+  .grain-btn{padding:8px 4px!important;font-size:10px!important}
+  .tag{font-size:10px!important;padding:1px 6px!important}
+  .goal-card:hover,.top-card:hover,.kpi-card:hover,.rank-table tbody tr:hover td,.data-table tr:hover td,.lead-detail-item:hover{transform:none!important;box-shadow:none!important}
+  .progress-bar{height:5px!important;margin:8px 0 4px!important}
+}
+@media(min-width:769px) and (max-width:1200px){
+  .main{padding:16px 16px!important}
+  .goal-grid{grid-template-columns:repeat(2,1fr)!important;gap:12px!important}
+  .kpi-row{grid-template-columns:repeat(2,1fr)!important}
+  .top10-grid{grid-template-columns:repeat(3,1fr)!important}
+  .chart-2col{grid-template-columns:1fr!important}
+  .chart-3col{grid-template-columns:1fr 1fr!important}
+  .leads-stats{grid-template-columns:repeat(2,1fr)!important}
+  .leads-chart-row{grid-template-columns:1fr 1fr!important}
+  .week-grid{grid-template-columns:repeat(2,1fr)!important}
+  .summary-grid{grid-template-columns:repeat(2,1fr)!important}
+}
+
 @media(max-width:1200px){
   .sidebar{position:relative;width:100%;height:auto}
   .main{margin-left:0}
@@ -2014,6 +2085,10 @@ function applyFilters() {
   
   renderAll();
 }
+
+function toggleMobileSidebar(){var sb=document.querySelector('.sidebar'),ov=document.getElementById('mobileOverlay');sb.classList.toggle('mobile-open');ov.classList.toggle('active')}
+function closeMobileSidebar(){var sb=document.querySelector('.sidebar'),ov=document.getElementById('mobileOverlay');sb.classList.remove('mobile-open');ov.classList.remove('active')}
+document.addEventListener('click',function(e){var sb=document.querySelector('.sidebar');if(!sb)return;if(e.target.matches&&e.target.matches('.sb-btn,.grain-btn,.sb-select,.ms-trigger,.ms-opt,#sf-city,.ms-search input')){if(sb.classList.contains('mobile-open'))closeMobileSidebar()}});
 
 function clearFilters() {
   selectedChannels = [];
@@ -3866,6 +3941,9 @@ function refreshAll() {
   };
 })();
 </script>
+
+<div class="mobile-hamburger" id="mobileHamburger" onclick="toggleMobileSidebar()">☰</div>
+<div class="mobile-overlay" id="mobileOverlay" onclick="closeMobileSidebar()"></div>
 
 </body>
 </html>
