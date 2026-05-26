@@ -1,4 +1,4 @@
-// Auto-generated from 渠道数据.xlsx + 拓展线索.xlsx - 2026-05-26 11:22:46
+// Auto-generated from 渠道数据.xlsx + 拓展线索.xlsx - 2026-05-27 00:14:59
 
 // =================== 渠道数据 ===================
 var CHANNELS = [

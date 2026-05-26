@@ -344,8 +344,8 @@ body{background:#0a1628;min-height:100vh;font-family:-apple-system,BlinkMacSyste
 .tip-tag-purple{background:rgba(139,92,246,0.15);color:#c084fc}
 
 /* 线索明细列表 */
-.lead-detail-list{max-height:320px;overflow-y:auto}
-.lead-detail-item{display:grid;grid-template-columns:65px 70px 70px 55px 65px 1fr;gap:8px;padding:6px 8px;border-bottom:1px solid rgba(255,255,255,0.04);font-size:11px;align-items:center}
+.lead-detail-list{max-height:2000px;overflow-y:auto;width:100%}
+.lead-detail-item{display:flex;gap:0;padding:6px 4px;border-bottom:1px solid rgba(255,255,255,0.04);font-size:11px;align-items:center}
 .lead-detail-item:hover{background:rgba(59,130,246,0.05)}
 .lead-detail-header{font-weight:600;color:#64748b;background:rgba(15,23,42,0.5);border-radius:6px 6px 0 0;position:sticky;top:0;z-index:1}
 .lead-detail-header:hover{background:rgba(15,23,42,0.5)}
@@ -433,8 +433,8 @@ body{background:#0a1628;min-height:100vh;font-family:-apple-system,BlinkMacSyste
   .leads-stats{grid-template-columns:repeat(2,1fr)!important}
   .leads-chart-row{grid-template-columns:1fr!important}
   .tips-grid{grid-template-columns:1fr!important}
-  .lead-detail-list{overflow-x:auto;-webkit-overflow-scrolling:touch}
-  .lead-detail-item{min-width:500px;font-size:10px!important}
+.lead-detail-list{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.lead-detail-item{font-size:10px!important}
   .rank-table-wrap,.top10-table-wrap,.table-scroll,.table-scroll-tall{overflow-x:auto;-webkit-overflow-scrolling:touch;font-size:11px!important}
   .rank-table,.top10-table-wrap .data-table,.data-table{min-width:600px;font-size:11px!important}
   .rank-table thead th,.data-table th,.data-table td,.top10-table-wrap .data-table thead th,.top10-table-wrap .data-table td{padding:7px 6px!important;font-size:10px!important}
@@ -690,8 +690,8 @@ body{background:#0a1628;min-height:100vh;font-family:-apple-system,BlinkMacSyste
             <th style="width:8.5%">上门率<span style="font-size:9px;color:#475569"><br>本周 / 环比</span></th>
             <th style="width:8.5%">成功率<span style="font-size:9px;color:#475569"><br>本周 / 环比</span></th>
             <th style="width:8.5%">客单价<span style="font-size:9px;color:#475569"><br>本周 / 环比</span></th>
-            <th style="width:14%;white-space:normal">城市表现<span style="font-size:9px;color:#475569"><br>表现差城市<span style="color:#f87171">(到达率低)</span></span></th>
-            <th style="width:14%;white-space:normal">产品表现<span style="font-size:9px;color:#475569"><br>表现差品类<span style="color:#f87171">(占比低)</span></span></th>
+            <th style="width:14%;white-space:normal">城市<span style="font-size:9px;color:#475569"><br>表现差城市<span style="color:#f87171">(上门率低)</span></span></th>
+            <th style="width:14%;white-space:normal">产品<span style="font-size:9px;color:#475569"><br>偏弱品类<span style="color:#f87171">(占比低)</span></span></th>
             <th style="width:5%">占比</th>
           </tr>
         </thead>
@@ -745,7 +745,6 @@ body{background:#0a1628;min-height:100vh;font-family:-apple-system,BlinkMacSyste
           <tr>
             <th>行业类别</th>
             <th>渠道类型</th>
-            <th>全国体量</th>
             <th>已建联</th>
             <th>已合作</th>
             <th>建联转化率</th>
@@ -1576,10 +1575,27 @@ function renderLeadsAll() {
   h += '<div><div style="font-size:11px;color:#64748b;margin-bottom:6px">行业成功/失败对比</div>';
   h += '<div id="leads-all-bar" style="height:220px"></div></div>';
   h += '</div>';
-  // 跨渠道行业对应表
-  h += '<div style="font-size:12px;font-weight:600;color:#cbd5e1;margin:12px 0 6px">📊 三渠道行业分布对应表</div>';
-  h += '<div class="lead-detail-list">';
-  h += '<div class="lead-detail-item lead-detail-header"><div>行业</div><div>全国体量</div><div>AI拓展</div><div>自拓</div><div>商务</div><div>总计/成功率</div></div>';
+  // 跨渠道行业对应表 - 横向展开铺满页面 - 字体优化版
+  h += '<div style="font-size:15px;font-weight:700;color:#f1f5f9;margin:16px 0 8px;letter-spacing:0.5px">📊 三渠道行业分布对应表</div>';
+  h += '<div style="font-size:12px;color:#94a3b8;margin-bottom:10px;line-height:1.8;padding:8px 12px;background:rgba(248,113,113,0.1);border-radius:6px;border-left:3px solid #f87171">格式说明：●绿=成功/○红=失败/◐黄=跟进中/–灰=暂无 • 体量单位=万家</div>';
+  h += '<div class="lead-detail-list" style="font-size:12px;overflow-x:auto;width:100%;border-radius:8px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,0.3)">';
+  // 两行表头 - 铺满100%宽度，每个约7%
+  var cw = 'flex:0 0 7%';
+  // 第一行表头：分组标签
+  h += '<div class="lead-detail-item lead-detail-header" style="font-size:11px;white-space:nowrap;display:flex;width:100%;min-width:720px;background:linear-gradient(135deg,#334155 0,#1e293b 100%);padding:10px 0;">';
+  h += '<div style="'+cw+';text-align:center;font-weight:700;color:#e2e8f0;border-right:1px solid rgba(255,255,255,0.1)">行业</div><div style="'+cw+';text-align:center;font-weight:700;color:#e2e8f0;border-right:1px solid rgba(255,255,255,0.1)">市场体量</div>';
+  h += '<div style="'+cw+';text-align:center;color:#38bdf8;font-weight:700;border-right:1px solid rgba(255,255,255,0.1)">🤖 AI外呼</div><div style="'+cw+';text-align:center;color:#38bdf8;font-weight:700;border-right:1px solid rgba(255,255,255,0.1)">🤖 AI外呼</div><div style="'+cw+';text-align:center;color:#38bdf8;font-weight:700;border-right:1px solid rgba(255,255,255,0.1)">🤖 AI外呼</div>';
+  h += '<div style="'+cw+';text-align:center;color:#4ade80;font-weight:700;border-right:1px solid rgba(255,255,255,0.1)">🚀 自拓</div><div style="'+cw+';text-align:center;color:#4ade80;font-weight:700;border-right:1px solid rgba(255,255,255,0.1)">🚀 自拓</div><div style="'+cw+';text-align:center;color:#4ade80;font-weight:700;border-right:1px solid rgba(255,255,255,0.1)">🚀 自拓</div>';
+  h += '<div style="'+cw+';text-align:center;color:#fbbf24;font-weight:700;border-right:1px solid rgba(255,255,255,0.1)">💼 商务</div><div style="'+cw+';text-align:center;color:#fbbf24;font-weight:700;border-right:1px solid rgba(255,255,255,0.1)">💼 商务</div><div style="'+cw+';text-align:center;color:#fbbf24;font-weight:700;border-right:1px solid rgba(255,255,255,0.1)">💼 商务</div>';
+  h += '<div style="'+cw+';text-align:center;font-weight:700;color:#f472b6;border-right:1px solid rgba(255,255,255,0.1)">📈 总计</div><div style="'+cw+';text-align:center;font-weight:700;color:#f472b6">成功率</div></div>';
+  // 第二行表头 - 明确的建联/成功/跟进标签
+  h += '<div class="lead-detail-item lead-detail-header" style="font-size:10px;white-space:nowrap;display:flex;width:100%;min-width:720px;color:#94a3b8;background:#1e293b;border-top:1px solid rgba(255,255,255,0.15);padding:8px 0;">';
+  h += '<div style="'+cw+'"></div><div style="'+cw+'"></div>';
+  h += '<div style="'+cw+';text-align:center">建联</div><div style="'+cw+';text-align:center">✓成功</div><div style="'+cw+';text-align:center">⏳跟进</div>';
+  h += '<div style="'+cw+';text-align:center">建联</div><div style="'+cw+';text-align:center">✓成功</div><div style="'+cw+';text-align:center">⏳跟进</div>';
+  h += '<div style="'+cw+';text-align:center">建联</div><div style="'+cw+';text-align:center">✓成功</div><div style="'+cw+';text-align:center">⏳跟进</div>';
+  h += '<div style="'+cw+';text-align:center;font-weight:600">📊合计</div><div style="'+cw+';text-align:center;font-weight:600">转化率</div></div>';
+  // 取前8个行业显示
   var crossIndustry = [
     {name:'回收',ai:{t:37,s:5,f:19},self:{t:8,s:1,f:4},biz:{t:0,s:0,f:0}},
     {name:'洗护',ai:{t:25,s:1,f:22},self:{t:0,s:0,f:0},biz:{t:0,s:0,f:0}},
@@ -1587,27 +1603,86 @@ function renderLeadsAll() {
     {name:'权益',ai:{t:0,s:0,f:0},self:{t:30,s:3,f:10},biz:{t:0,s:0,f:0}},
     {name:'其他',ai:{t:0,s:0,f:0},self:{t:39,s:10,f:12},biz:{t:82,s:6,f:70}},
     {name:'搬家',ai:{t:7,s:0,f:7},self:{t:0,s:0,f:0},biz:{t:0,s:0,f:0}},
-    {name:'京东',ai:{t:0,s:0,f:0},self:{t:7,s:0,f:4},biz:{t:0,s:0,f:0}},
     {name:'家政',ai:{t:0,s:0,f:0},self:{t:2,s:0,f:0},biz:{t:0,s:0,f:0}},
     {name:'洗车',ai:{t:1,s:0,f:1},self:{t:0,s:0,f:0},biz:{t:0,s:0,f:0}}
   ];
-  crossIndustry.forEach(function(ind) {
+  crossIndustry.forEach(function(ind, indIndex) {
     var totalT = ind.ai.t+ind.self.t+ind.biz.t;
     var totalS = ind.ai.s+ind.self.s+ind.biz.s;
     var totalF = ind.ai.f+ind.self.f+ind.biz.f;
     var totalRate = totalT > 0 ? (totalS/totalT*100).toFixed(1) : '—';
-    // 全国体量（万家），与 renderIndustryTable 的 nationalVolume 保持一致
-    var volMap = {'回收':'50万+','洗护':'5万+','家装':'200万+','权益':'—','其他':'—','搬家':'10万+','京东':'—','家政':'150万+','洗车':'30万+'};
-    var vol = volMap[ind.name] || '待调研';
-    h += '<div class="lead-detail-item">';
-    h += '<div style="font-weight:600;color:#e2e8f0">' + ind.name + '</div>';
-    h += '<div style="color:#64748b;font-size:10px">' + vol + '</div>';
-    h += '<div>' + ind.ai.t + '条<span class="lead-status ' + (ind.ai.s>0?'lead-status-success':ind.ai.t>0?'lead-status-fail':'') + '">' + (ind.ai.s>0?'✓'+ind.ai.s:ind.ai.t>0?'✗':'—') + '</span></div>';
-    h += '<div>' + ind.self.t + '条<span class="lead-status ' + (ind.self.s>0?'lead-status-success':ind.self.t>0?'lead-status-fail':'') + '">' + (ind.self.s>0?'✓'+ind.self.s:ind.self.t>0?'✗':'—') + '</span></div>';
-    h += '<div>' + ind.biz.t + '条<span class="lead-status ' + (ind.biz.s>0?'lead-status-success':ind.biz.t>0?'lead-status-fail':'') + '">' + (ind.biz.s>0?'✓'+ind.biz.s:ind.biz.t>0?'✗':'—') + '</span></div>';
-    h += '<div><strong style="color:' + (totalRate==='—'?'#64748b':parseFloat(totalRate)>15?'#34d399':parseFloat(totalRate)>5?'#fbbf24':'#f87171') + '">' + totalT + '条/' + totalRate + '%</strong></div>';
+    var cw = 'flex:0 0 7%';
+    // 格式化单个数字，清晰展示
+    var fmtCell = function(t,s,f) {
+      if (t===0) return '<span style="color:#64748b">–</span>';
+      var color = s>0?'#34d399':f>0?'#f87171':'#fbbf24';
+      return '<span style="color:'+color+'">'+t+'</span>';
+    };
+    // 全国体量映射
+    var volMap = {'回收':'50万','洗护':'5万','家装':'200万','权益':'—','其他':'—','搬家':'10万','家政':'150万','洗车':'30万'};
+    var vol = volMap[ind.name] || '—';
+    // 格式化数字 - 更大更清晰的展示
+    var fmtVal = function(t,s,f,label) {
+      if (!t || t===0) return '<span style="color:#475569;font-size:11px">—</span>';
+      var dot = s>0?'●':(f>0?'○':'◐');
+      var dotColor = s>0?'#4ade80':(f>0?'#f87171':'#fbbf24');
+      return '<span style="color:'+dotColor+';font-weight:600;font-size:12px" title="'+label+'">'+dot+t+'</span>';
+    };
+    var rowBg = indIndex % 2 === 0 ? 'background:#0f172a' : 'background:#1e293b';
+    h += '<div class="lead-detail-item" style="font-size:12px;white-space:nowrap;display:flex;width:100%;min-width:720px;padding:10px 0;'+rowBg+';border-bottom:1px solid rgba(255,255,255,0.05);transition:background 0.2s">';
+    h += '<div style="font-weight:700;color:#f1f5f9;'+cw+';text-align:center;font-size:13px">' + ind.name + '</div>';
+    h += '<div style="color:#64748b;'+cw+';text-align:center;font-size:12px">' + vol + '</div>';
+    // AI列 (建联/成功/跟进各一列)
+    h += '<div style="'+cw+';text-align:center;color:#38bdf8;font-weight:600;font-size:12px">' + (ind.ai.t>0?ind.ai.t:'-') + '</div>';
+    h += '<div style="'+cw+';text-align:center">' + (ind.ai.s>0?'<span style="color:#4ade80;font-weight:700;font-size:12px">●'+ind.ai.s+'</span>':(ind.ai.s===0&&ind.ai.t>0?'<span style="color:#f87171;font-size:11px">○0</span>':'<span style="color:#475569;font-size:11px">—</span>')) + '</div>';
+    h += '<div style="'+cw+';text-align:center">' + (ind.ai.f>0?'<span style="color:#fbbf24;font-weight:600;font-size:12px">◐'+ind.ai.f+'</span>':(ind.ai.f===0&&ind.ai.t>0?'<span style="color:#475569;font-size:11px">—</span>':'<span style="color:#475569;font-size:11px">—</span>')) + '</div>';
+    // 自拓列
+    h += '<div style="'+cw+';text-align:center;color:#4ade80;font-weight:600;font-size:12px">' + (ind.self.t>0?ind.self.t:'-') + '</div>';
+    h += '<div style="'+cw+';text-align:center">' + (ind.self.s>0?'<span style="color:#4ade80;font-weight:700;font-size:12px">●'+ind.self.s+'</span>':(ind.self.s===0&&ind.self.t>0?'<span style="color:#f87171;font-size:11px">○0</span>':'<span style="color:#475569;font-size:11px">—</span>')) + '</div>';
+    h += '<div style="'+cw+';text-align:center">' + (ind.self.f>0?'<span style="color:#fbbf24;font-weight:600;font-size:12px">◐'+ind.self.f+'</span>':(ind.self.f===0&&ind.self.t>0?'<span style="color:#475569;font-size:11px">—</span>':'<span style="color:#475569;font-size:11px">—</span>')) + '</div>';
+    // 商务列
+    h += '<div style="'+cw+';text-align:center;color:#fbbf24;font-weight:600;font-size:12px">' + (ind.biz.t>0?ind.biz.t:'-') + '</div>';
+    h += '<div style="'+cw+';text-align:center">' + (ind.biz.s>0?'<span style="color:#4ade80;font-weight:700;font-size:12px">●'+ind.biz.s+'</span>':(ind.biz.s===0&&ind.biz.t>0?'<span style="color:#f87171;font-size:11px">○0</span>':'<span style="color:#475569;font-size:11px">—</span>')) + '</div>';
+    h += '<div style="'+cw+';text-align:center">' + (ind.biz.f>0?'<span style="color:#fbbf24;font-weight:600;font-size:12px">◐'+ind.biz.f+'</span>':(ind.biz.f===0&&ind.biz.t>0?'<span style="color:#475569;font-size:11px">—</span>':'<span style="color:#475569;font-size:11px">—</span>')) + '</div>';
+    // 总计和成功率
+    h += '<div style="'+cw+';text-align:center;color:#f1f5f9;font-weight:700;font-size:13px">' + totalT + '</div>';
+    h += '<div style="'+cw+';text-align:center"><strong style="color:' + (totalRate==='—'?'#64748b':parseFloat(totalRate)>15?'#4ade80':parseFloat(totalRate)>5?'#fbbf24':'#f87171') + ';font-size:14px;font-weight:700">' + totalRate + '%</strong></div>';
     h += '</div>';
   });
+  // 计算总计行
+  var sumT = 0, sumS = 0, sumF = 0;
+  crossIndustry.forEach(function(ind){
+    sumT += ind.ai.t + ind.self.t + ind.biz.t;
+    sumS += ind.ai.s + ind.self.s + ind.biz.s;
+    sumF += ind.ai.f + ind.self.f + ind.biz.f;
+  });
+  var sumRate = sumT > 0 ? (sumS/sumT*100).toFixed(1) : '—';
+  var totalRowCw = 'flex:0 0 7%';
+  h += '<div class="lead-detail-item" style="font-size:12px;white-space:nowrap;display:flex;width:100%;min-width:720px;background:linear-gradient(90deg,#7c3aed 0,#db2777 100%);border-top:2px solid #fbbf24;margin-top:4px;padding:12px 0;font-weight:700">';
+  h += '<div style="font-weight:700;color:#ffffff;'+totalRowCw+';text-align:center;font-size:14px">📊 总计</div>';
+  h += '<div style="color:#e2e8f0;'+totalRowCw+';text-align:center;font-size:12px">—</div>';
+  // AI小计
+  var aiT=0,aiS=0;
+  crossIndustry.forEach(function(ind){aiT+=ind.ai.t;aiS+=ind.ai.s;});
+  h += '<div style="'+totalRowCw+';text-align:center;color:#38bdf8;font-weight:700;font-size:13px">'+aiT+'</div>';
+  h += '<div style="'+totalRowCw+';text-align:center"><span style="color:#4ade80;font-weight:700;font-size:12px">●'+aiS+'</span></div>';
+  h += '<div style="'+totalRowCw+';text-align:center">-</div>';
+  // 自拓小计
+  var selfT=0,selfS=0;
+  crossIndustry.forEach(function(ind){selfT+=ind.self.t;selfS+=ind.self.s;});
+  h += '<div style="'+totalRowCw+';text-align:center;color:#4ade80;font-weight:700;font-size:13px">'+selfT+'</div>';
+  h += '<div style="'+totalRowCw+';text-align:center"><span style="color:#4ade80;font-weight:700;font-size:12px">●'+selfS+'</span></div>';
+  h += '<div style="'+totalRowCw+';text-align:center">-</div>';
+  // 商务小计
+  var bizT=0,bizS=0;
+  crossIndustry.forEach(function(ind){bizT+=ind.biz.t;bizS+=ind.biz.s;});
+  h += '<div style="'+totalRowCw+';text-align:center;color:#fbbf24;font-weight:700;font-size:13px">'+bizT+'</div>';
+  h += '<div style="'+totalRowCw+';text-align:center"><span style="color:#4ade80;font-weight:700;font-size:12px">●'+bizS+'</span></div>';
+  h += '<div style="'+totalRowCw+';text-align:center">-</div>';
+  // 总计列
+  h += '<div style="'+totalRowCw+';text-align:center;color:#ffffff;font-weight:800;font-size:14px">'+sumT+'</div>';
+  h += '<div style="'+totalRowCw+';text-align:center"><strong style="color:'+(parseFloat(sumRate)>15?'#4ade80':parseFloat(sumRate)>5?'#fbbf24':'#f87171')+';font-weight:800;font-size:14px">'+sumRate+'%</strong></div>';
+  h += '</div>';
   h += '</div>';
   h += '<div class="analysis-box collapsed" id="leads-all-summary"><div class="analysis-title" style="color:#f59e0b;cursor:pointer" onclick="toggleAnalysisBox(\'leads-all-summary\')">📌 总体策略建议 <span style="font-size:10px;color:#64748b">点击展开分析、原因、策略</span><span style="margin-left:auto;font-size:11px;color:#64748b" class="toggle-icon">▶</span></div><div class="analysis-body" style="display:none">';
   h += '<div class="leads-insight-item">• 整体成功率10.8%偏低，核心瓶颈：合作模式不够灵活(17条)、线索质量参差不齐(28条无需求)</div>';
@@ -2388,7 +2463,7 @@ function renderTop10() {
   }
   var declineProducts = ['热水器(-15%)','疏通(-6%)','电视(-0.8%)'];
   
-  // 辅助函数：获取某渠道最差城市（到达率最低的2个，阈值<45%才展示"表现差"）
+  // 辅助函数：获取某渠道上门率低的城市（阈值<45%）
   function getWorstCities(chName) {
     if (typeof CHANNEL_CITY === 'undefined' || !CHANNEL_CITY[chName]) return {note:'数据不足',bad:[]};
     var cities = CHANNEL_CITY[chName].slice();
@@ -2400,9 +2475,9 @@ function renderTop10() {
       allCities.sort(function(a,b){return b.orders - a.orders;});
       if (allCities.length === 0) return {note:'数据不足',bad:[]};
       var best = allCities[0];
-      return {note: best.city + ':' + best.arrivalRate.toFixed(1) + '%('+best.orders+'单)', bad:[]};
+      return {note: best.city + '(' + best.arrivalRate.toFixed(1) + '%)', bad:[]};
     }
-    // 按到达率升序
+    // 按上门率升序
     cities.sort(function(a,b){return a.arrivalRate - b.arrivalRate;});
     var bad = [];
     var maxShow = 3;
@@ -2412,56 +2487,74 @@ function renderTop10() {
       }
     }
     if (bad.length === 0) {
-      // 没有"差"的，就显示到达率最低的1个城市
+      // 没有"差"的，就显示上门率最低的1个城市
       var worst = cities[0];
-      return {note: worst.city + ':' + worst.arrivalRate.toFixed(1) + '%', bad:[]};
+      return {note: worst.city + '(' + worst.arrivalRate.toFixed(1) + '%)', bad:[]};
     }
     var noteParts = [];
     for (var j = 0; j < bad.length; j++) {
-      noteParts.push(bad[j].city + ':' + bad[j].ar.toFixed(1) + '%');
+      noteParts.push(bad[j].city + '(' + bad[j].ar.toFixed(1) + '%)');
     }
     return {note: noteParts.join(' '), bad:bad};
   }
 
-  // 辅助函数：获取某渠道最差产品（订单占比最低的2个品类）
-  function getWorstProducts(chName) {
-    if (typeof CHANNEL_PRODUCT === 'undefined' || !CHANNEL_PRODUCT[chName]) return {note:'数据不足',bad:[]};
+  // 辅助函数：获取某渠道偏弱产品（对比整体占比，渠道占比明显低于整体）
+  function getWeakProducts(chName) {
+    if (typeof CHANNEL_PRODUCT === 'undefined' || !CHANNEL_PRODUCT[chName]) return {note:'数据不足',weak:[]};
     var products = CHANNEL_PRODUCT[chName].slice();
-    var total = products.reduce(function(s,p){return s+p.orders;},0);
-    // 按订单量升序
-    products.sort(function(a,b){return a.orders - b.orders;});
-    var bad = [];
-    var maxShow = 2;
-    for (var i = 0; i < products.length && bad.length < maxShow; i++) {
-      var pct = total > 0 ? (products[i].orders / total * 100).toFixed(1) : '0';
-      // 占比<3%才算"差"，或者渠道只有1-2个产品类型则标注单一
-      if (parseFloat(pct) < 3 || (products.length <= 2 && i < 1)) {
-        bad.push({product:products[i].product, orders:products[i].orders, pct:pct});
+    var chTotal = products.reduce(function(s,p){return s+p.orders;},0);
+    if (chTotal === 0) return {note:'无数据',weak:[]};
+    
+    // 计算整体各产品组占比
+    if (typeof window._overallProductPct === 'undefined') {
+      window._overallProductPct = {};
+      var overallTotals = {};
+      var totalAll = 0;
+      for (var pCh in CHANNEL_PRODUCT) {
+        CHANNEL_PRODUCT[pCh].forEach(function(p) {
+          overallTotals[p.product] = (overallTotals[p.product] || 0) + p.orders;
+          totalAll += p.orders;
+        });
+      }
+      for (var prod in overallTotals) {
+        window._overallProductPct[prod] = (overallTotals[prod] / totalAll * 100).toFixed(1);
       }
     }
-    if (bad.length === 0 && products.length > 0) {
-      // 没有明显差的，显示占比最低的1个
-      var worst = products[0];
-      var wpct = total > 0 ? (worst.orders / total * 100).toFixed(1) : '0';
-      return {note: worst.product + '(' + wpct + '%)', bad:[]};
-    }
-    if (products.length <= 2 && products.length > 0) {
-      // 产品线单一
-      var singleNote = products.map(function(p){
-        var sp = total>0?(p.orders/total*100).toFixed(0):'0';
-        return p.product+'('+sp+'%)';
-      }).join(' ');
-      if (bad.length === 0) bad = products.map(function(p){
-        var sp2 = total>0?(p.orders/total*100).toFixed(1):'0';
-        return {product:p.product,orders:p.orders,pct:sp2};
+    
+    // 找出该渠道占比明显低于整体的产品组
+    var weak = [];
+    products.forEach(function(p) {
+      var chPct = (p.orders / chTotal * 100);
+      var overPct = parseFloat(window._overallProductPct[p.product] || 0);
+      // 整体占比>5%且渠道占比<整体的80%
+      if (overPct > 5 && chPct < overPct * 0.8) {
+        weak.push({product:p.product, orders:p.orders, pct:chPct.toFixed(1), overPct:overPct});
+      }
+    });
+    
+    // 排序：偏离度最大的在前
+    weak.sort(function(a,b){
+      var diffA = parseFloat(a.overPct) - parseFloat(a.pct);
+      var diffB = parseFloat(b.overPct) - parseFloat(b.pct);
+      return diffB - diffA;
+    });
+    
+    var maxShow = 2;
+    var weakShow = weak.slice(0, maxShow);
+    if (weakShow.length === 0) {
+      // 没有偏弱的，显示占比最低的1个
+      var sortedByPct = products.slice().sort(function(a,b){
+        var pctA = a.orders/chTotal*100, pctB = b.orders/chTotal*100;
+        return pctA - pctB;
       });
-      return {note: '单一:' + singleNote, bad:bad};
+      var minProd = sortedByPct[0];
+      var minPct = (minProd.orders/chTotal*100).toFixed(1);
+      return {note: minProd.product + '(' + minPct + '%)', weak:[]};
     }
-    var noteParts = [];
-    for (var j = 0; j < bad.length; j++) {
-      noteParts.push(bad[j].product + '(' + bad[j].pct + '%)');
-    }
-    return {note: noteParts.join(' '), bad:bad};
+    var noteParts = weakShow.map(function(w) {
+      return w.product + '(' + w.pct + '%vs整体' + w.overPct + '%)';
+    });
+    return {note: noteParts.join(' '), weak:weakShow};
   }
   
   var enriched = filtered.map(function(c) {
@@ -2488,7 +2581,7 @@ function renderTop10() {
       // 城市表现：基于 CHANNEL_CITY 取该渠道最差城市
       cityInfo: getWorstCities(c.name),
       // 产品表现：基于 CHANNEL_PRODUCT 取该渠道最差产品
-      productInfo: getWorstProducts(c.name)
+      productInfo: getWeakProducts(c.name)
     };
   });
   
@@ -2545,7 +2638,7 @@ function renderTop10() {
     var cityColor = c.cityInfo.bad.length > 0 ? '#f87171' : '#fbbf24';
     html += '<td style="font-size:10px;color:'+cityColor+';line-height:1.4;white-space:normal;word-break:break-word">' + c.cityInfo.note + '</td>';
     // 产品表现
-    var pColor = c.productInfo.bad.length > 0 ? '#f87171' : '#475569';
+    var pColor = c.productInfo.weak.length > 0 ? '#f87171' : '#475569';
     html += '<td style="font-size:10px;color:'+pColor+';line-height:1.3;white-space:normal;word-break:break-word">' + c.productInfo.note + '</td>';
     // 占比
     html += '<td style="color:#64748b;font-size:11px">' + weekPct + '%</td>';
@@ -2927,7 +3020,6 @@ function renderIndustryTable() {
     html += '<tr style="' + rowStyle + '">'
       + '<td><strong style="color:' + (hasOrders?'#e2e8f0':'#64748b') + '">' + ind.industry + '</strong></td>'
       + '<td><span style="font-size:11px;color:#8b5cf6;background:rgba(139,92,246,0.1);padding:2px 6px;border-radius:4px">' + cat + '</span></td>'
-      + '<td style="color:#64748b;font-size:11px">' + vol + '</td>'
       + '<td>' + linked + '家</td>'
       + '<td style="color:' + (hasOrders?'#34d399':'#475569') + ';font-weight:600">' + (hasOrders?coop+'家':'—') + '</td>'
       + '<td><span class="tag ' + convClass + '">' + (hasOrders?conv+'%':'未合作') + '</span></td>'
@@ -3526,6 +3618,81 @@ function buildDataContext() {
       ctx += '  ' + c.city + ': ' + c.orders + '单, 上门率' + c.arrivalRate + '%, 成功率' + c.successRate + '%\n';
     });
     ctx += '\n';
+  }
+
+  // ========== 城市变化分析：各渠道上门率低的城市 ==========
+  if (typeof CHANNEL_CITY !== 'undefined' && typeof CHANNELS !== 'undefined') {
+    // Get overall city arrival rates for comparison
+    var cityArrivalRates = {};
+    if (typeof CITY !== 'undefined') {
+      CITY.forEach(function(c) { cityArrivalRates[c.city] = c.arrivalRate; });
+    }
+    // Find low visit rate cities for each channel
+    var lowVisitCities = {};
+    filtered.forEach(function(ch) {
+      if (CHANNEL_CITY[ch.name]) {
+        var cities = CHANNEL_CITY[ch.name];
+        // Sort by arrivalRate ascending, take bottom ones (< 55% or bottom 3)
+        var lowCities = cities.filter(function(cc) { return cc.arrivalRate < 55; })
+                          .sort(function(a,b){ return a.arrivalRate - b.arrivalRate; })
+                          .slice(0, 3);
+        if (lowCities.length > 0) {
+          lowVisitCities[ch.name] = lowCities.map(function(cc) {
+            return cc.city + '(' + cc.arrivalRate.toFixed(1) + '%)';
+          });
+        }
+      }
+    });
+    if (Object.keys(lowVisitCities).length > 0) {
+      ctx += '【城市变化】各渠道上门率低的城市（<55%）：\n';
+      for (var chName in lowVisitCities) {
+        ctx += '  ' + chName + ': ' + lowVisitCities[chName].join(', ') + '\n';
+      }
+      ctx += '\n';
+    }
+  }
+
+  // ========== 产品变化分析：各渠道产品组占比低于整体的产品组 ==========
+  if (typeof CHANNEL_PRODUCT !== 'undefined' && typeof CHANNELS !== 'undefined') {
+    // Calculate overall product group ratios
+    var overallProductOrders = {};
+    var totalProductOrders = 0;
+    for (var pCh in CHANNEL_PRODUCT) {
+      CHANNEL_PRODUCT[pCh].forEach(function(p) {
+        overallProductOrders[p.product] = (overallProductOrders[p.product] || 0) + p.orders;
+        totalProductOrders += p.orders;
+      });
+    }
+    var overallProductPct = {};
+    for (var prod in overallProductOrders) {
+      overallProductPct[prod] = (overallProductOrders[prod] / totalProductOrders * 100).toFixed(1);
+    }
+    // Find channels with product groups below overall ratio
+    var lowPerfProducts = {};
+    filtered.forEach(function(ch) {
+      if (CHANNEL_PRODUCT[ch.name]) {
+        var chTotal = CHANNEL_PRODUCT[ch.name].reduce(function(s,p){ return s+p.orders; }, 0);
+        var lowProds = [];
+        CHANNEL_PRODUCT[ch.name].forEach(function(p) {
+          var chPct = (p.orders / chTotal * 100);
+          var overPct = parseFloat(overallProductPct[p.product] || 0);
+          // Channel ratio significantly below overall (< 80% of overall ratio)
+          if (overPct > 5 && chPct < overPct * 0.8) {
+            lowProds.push(p.product + '(' + chPct.toFixed(1) + '%vs整体' + overPct + '%)');
+          }
+        });
+        if (lowProds.length > 0) {
+          lowPerfProducts[ch.name] = lowProds;
+        }
+      }
+    });
+    if (Object.keys(lowPerfProducts).length > 0) {
+      ctx += '【产品变化】各渠道偏弱的产品组（占比明显低于整体）：\n';
+      for (var chName2 in lowPerfProducts) {
+        ctx += '  ' + chName2 + ': ' + lowPerfProducts[chName2].join(', ') + '\n';
+      }
+      ctx += '\n';
+    }
   }
 
   // 取消缘由
