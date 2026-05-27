@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>渠道数据分析监控系统</title>
+<script>
+// 确保变量存在
+var CHANNELS, DAILY, INDUSTRY, WOODPECKER, CANCEL, VOICE;
+</script>
 <script src="lib/echarts.min.js"></script>
 <script>if(typeof echarts==='undefined'){document.write('<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"><\/script>');}</script>
 <script src="data.js"></script>
@@ -555,7 +559,7 @@ body{background:#0a1628;min-height:100vh;font-family:-apple-system,BlinkMacSyste
   <div class="sb-divider"></div>
   <div style="font-size:10px;color:#334155;line-height:1.6">
     <div>数据周期：5.1</div>
-    <div>~ 5.25</div>
+    <div>~ 5.26</div>
     <div style="margin-top:6px">总单量：107,084</div>
     <div>渠道数量：213家</div>
   </div>
@@ -573,7 +577,7 @@ body{background:#0a1628;min-height:100vh;font-family:-apple-system,BlinkMacSyste
   <div class="page-header">
     <div>
       <div class="page-title">📊 渠道数据分析监控系统</div>
-      <div class="page-meta" id="page-meta">统计周期：5.1 ~ 5.25 | 5月目标：136,390单 | 筛选：<span id="filter-label">全部数据</span></div>
+      <div class="page-meta" id="page-meta">统计周期：5.1 ~ 5.26 | 5月目标：136,390单 | 筛选：<span id="filter-label">全部数据</span></div>
     </div>
     <span id="aiStatusTag" style="font-size:11px;padding:4px 10px;border-radius:10px;background:rgba(16,185,129,0.15);color:#34d399;border:1px solid rgba(16,185,129,0.3);margin-right:8px">✅ 就绪</span>
     <button class="refresh-btn" onclick="refreshAll()" style="background:linear-gradient(135deg,rgba(59,130,246,0.25),rgba(139,92,246,0.25));border-color:rgba(99,102,241,0.4)">🔄 刷新 & AI分析</button>
@@ -587,7 +591,7 @@ body{background:#0a1628;min-height:100vh;font-family:-apple-system,BlinkMacSyste
   <div class="section" id="section-goal">
     <div class="section-hd">
       <div class="section-title">🎯 第一板块：当月目标进度</div>
-      <div class="section-sub">5月 | 统计截止：5.25</div>
+      <div class="section-sub">5月 | 统计截止：5.26</div>
     </div>
 
     <!-- 目标卡片 -->
@@ -677,7 +681,7 @@ body{background:#0a1628;min-height:100vh;font-family:-apple-system,BlinkMacSyste
     <div id="chart-daily" class="chart-container" style="height:300px;margin:0 0 14px"></div>
     
     <!-- TOP10渠道排名表格 -->
-    <div style="font-size:13px;font-weight:600;color:#cbd5e1;margin:16px 0 10px">📊 TOP10渠道新单排名 <span style="font-size:10px;color:#64748b;font-weight:400">（近一周 5.19-5.25 · 按预估周新单降序）</span></div>
+    <div style="font-size:13px;font-weight:600;color:#cbd5e1;margin:16px 0 10px">📊 TOP10渠道新单排名 <span style="font-size:10px;color:#64748b;font-weight:400">（近一周 5.20-5.26 · 按预估周新单降序）</span></div>
     <div class="top10-table-wrap">
       <table class="data-table">
         <thead>
@@ -703,12 +707,12 @@ body{background:#0a1628;min-height:100vh;font-family:-apple-system,BlinkMacSyste
     <div class="analysis-box collapsed" id="analysis-top10" onclick="toggleAnalysisBox('analysis-top10', this)">
       <div class="analysis-title">📉 TOP10渠道下滑分析（联动取消缘由·城市·产品·上门率·啄木鸟转单率）<span id="analysis-top10-scope"></span><span style="margin-left:auto;font-size:11px;color:#64748b" class="toggle-icon">▶</span></div>
       <div class="analysis-body" style="display:none">
-      <div class="issue-item"><strong>渠道集中风险</strong>：TOP5占比59.7%（63,907单），过度依赖头部<span class="assignee-badge">商务组</span><span class="time-badge">5.25</span></div>
-      <div class="issue-item"><strong>新渠道质量差</strong>：煜志网络10,610单排TOP3，上门率50.4%、成功率20.7%，抖音规则变化致流量波动<span class="assignee-badge">潘辰光</span><span class="time-badge">5.25</span></div>
-      <div class="issue-item"><strong>老渠道分化</strong>：吉时雨上门率46.6%、成功率19.9%均为TOP5最低；有祥广告受乌鲁木齐/太原拖累<span class="assignee-badge">刘渝峰</span><span class="time-badge">5.25</span></div>
-      <div class="strategy-item">周二：上门率<50%渠道推送城市白名单+话术包<span class="assignee-badge">潘辰光</span></div>
-      <div class="strategy-item">周三：宜昌玖源加投成都/乌市；煜志聚焦一线；更新抖音话术<span class="assignee-badge">刘渝峰</span></div>
-      <div class="strategy-item">周五：推进第5/6家渠道合作；取消率复盘会<span class="assignee-badge">薛沙沙</span></div>
+      <div class="issue-item"><strong>渠道集中风险</strong>：TOP5占比59.7%（71,460单），TOP10占比82.5%（98,810单），过度依赖头部渠道<span class="assignee-badge">商务组</span><span class="time-badge">5.26</span></div>
+      <div class="issue-item"><strong>新渠道质量差</strong>：煜志网络11,367单排TOP3，上门率50.3%、成功率21.6%，抖音规则变化致流量波动；吉时雨/一诺上门率均&lt;48%<span class="assignee-badge">潘辰光</span><span class="time-badge">5.26</span></div>
+      <div class="issue-item"><strong>老渠道分化</strong>：有祥广告16,752单上门率仅44.5%为TOP5最低；武汉亲益冠逆势上升（上门率63.1%、成功率37.0%）<span class="assignee-badge">刘渝峰</span><span class="time-badge">5.26</span></div>
+      <div class="strategy-item">周二：上门率&lt;48%渠道推送城市白名单+话术包；有祥广告专项排查乌鲁木齐/太原拖累<span class="assignee-badge">潘辰光</span></div>
+      <div class="strategy-item">周三：煜志聚焦一线城市；吉时雨/一诺输出上门率提升方案；武汉亲益冠模式总结推广<span class="assignee-badge">刘渝峰</span></div>
+      <div class="strategy-item">周五：推进新渠道合作；取消率复盘会；5月冲刺剩余16,919单<span class="assignee-badge">薛沙沙</span></div>
       </div>
     </div>
 
@@ -721,10 +725,10 @@ body{background:#0a1628;min-height:100vh;font-family:-apple-system,BlinkMacSyste
       <div class="ai-panel-body" id="ai-panel-body-1">
         <div class="ai-model-bar" id="ai-model-bar-1"></div>
         <div class="ai-results-area" id="ai-results-1">
-          <div class="ai-item"><strong>渠道健康度评分</strong>：TOP10渠道综合评分62/100，较上周-3分。本周32,164单环比-5.1%，但新渠道逆势+17.5%，老渠道-8.8%为主要拖累。宜昌玖源商贸(20,240单)稳居榜首，有祥广告(13,717单)紧随其后</div>
-          <div class="ai-item"><strong>流量质量预警</strong>：取消率54.9%(58,838/107,084)偏高。故障恢复正常占28.0%，咨询价格+价格贵合计36.9%，需强化价格预期管理。采买类占比92.2%一家独大</div>
-          <div class="ai-item"><strong>周度预测</strong>：按当前日均4,462单趋势，月末预计完成138,322单（目标136,390单），有望超额完成。日均维持4,187单即可达标（剩余7天/29,306单）</div>
-          <div class="ai-item"><strong>建议</strong>：优先帮扶成功率<22%的渠道（吉时雨家政19.9%/一诺家电20.7%/煜志网络20.7%）；本周环比-5.1%需关注流量质量变化；拓展网站/媒体/家政等高价值品类，降低采买92.2%集中度风险</div>
+          <div class="ai-item"><strong>渠道健康度评分</strong>：TOP10渠道综合评分65/100。累计119,471单完成率87.6%，剩余5天需16,919单（日均3,384）。近期日均回升至5,265单，5.26达6,989单峰值。宜昌玖源商贸(22,055单)稳居榜首，有祥广告(16,752单)紧随，武汉亲益冠逆势增长(8,330单)</div>
+          <div class="ai-item"><strong>流量质量预警</strong>：取消率47.4%(56,740/119,733)仍偏高。故障恢复正常占28.0%(17,088单)，价格相关(咨询+贵+不认可)合计36.9%(22,485单)，用户找其他商家9.0%(5,490单)。推广类占比91.8%(109,879单)一家独大，媒体类(1,973单)上门率71.2%成功率46.6%质量最高但体量不足</div>
+          <div class="ai-item"><strong>月度预测</strong>：按最近5天日均5,739单趋势，月末预计完成148,166单，超额11,776单。日均维持3,384单即可达标（剩余5天/16,919单）。当前日均4,595单远超达标线，目标达成无压力</div>
+          <div class="ai-item"><strong>建议</strong>：优先帮扶成功率&lt;22%的渠道（我唱20.9%/一诺家电21.3%/煜志网络21.6%/吉时雨20.6%）；推广类91.8%集中度风险高，拓展媒体/平台类渠道；有祥广告上门率44.5%需专项排查；武汉亲益冠模式应复制推广</div>
         </div>
         <div class="ai-retry-bar" id="ai-retry-bar-1" style="display:none"></div>
       </div>
@@ -763,10 +767,11 @@ body{background:#0a1628;min-height:100vh;font-family:-apple-system,BlinkMacSyste
     <div class="analysis-box collapsed" id="analysis-industry" onclick="toggleAnalysisBox('analysis-industry', this)">
       <div class="analysis-title">📊 行业分析洞察<span id="analysis-industry-scope"></span><span style="margin-left:auto;font-size:11px;color:#64748b" class="toggle-icon">▶</span></div>
       <div class="analysis-body" style="display:none">
-      <div class="issue-item"><strong>家政类</strong>：上门率78.3%、成功率65.9%，质量最高，体量1,749单，需加速复制模式</div>
-      <div class="issue-item"><strong>采买类</strong>：占比92.2%（98,682单），上门率52.5%、成功率26.3%，拉低大盘主因</div>
-      <div class="issue-item"><strong>媒体类</strong>：上门率72.1%、成功率46.9%，质量高但仅1,680单，应重点拓展</div>
-      <div class="strategy-item">复制家政/网站类模式；采买类做话术优化；媒体类目标新增5家<span class="assignee-badge">商务组</span></div>
+      <div class="issue-item"><strong>媒体类</strong>：上门率71.2%、成功率46.6%，质量最高但仅1,973单(1.6%)，应重点拓展复制</div>
+      <div class="issue-item"><strong>平台类</strong>：上门率64.7%、成功率44.6%，5,032单体量可观(4.2%)，质量仅次于媒体类</div>
+      <div class="issue-item"><strong>推广类</strong>：占比91.8%（109,879单），上门率51.4%、成功率26.4%，拉低大盘主因，需优化话术</div>
+      <div class="issue-item"><strong>百度类</strong>：上门率64.9%、成功率37.6%，2,707单体量适中(2.3%)，品质稳定</div>
+      <div class="strategy-item">重点拓展媒体类/平台类渠道（成功率>44%）；推广类做话术优化降取消；百度类保持投放节奏<span class="assignee-badge">商务组</span></div>
       </div>
     </div>
 
@@ -774,7 +779,7 @@ body{background:#0a1628;min-height:100vh;font-family:-apple-system,BlinkMacSyste
     <div class="leads-panel" id="leads-panel">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
         <div style="font-size:14px;font-weight:600;color:#e2e8f0">🔗 行业拓展数据库</div>
-        <div style="font-size:11px;color:#64748b">数据来源：腾讯文档「拓展线索」 · 全国体量：天眼查/企查查2025-2026（排除夫妻店，仅统计有规模企业） · 更新时间：5.25</div>
+        <div style="font-size:11px;color:#64748b">数据来源：腾讯文档「拓展线索」 · 全国体量：天眼查/企查查2025-2026（排除夫妻店，仅统计有规模企业） · 更新时间：5.27</div>
       </div>
       <div class="leads-stats" id="leads-summary-stats">
         <div class="leads-stat"><div class="leads-stat-label">线索总量</div><div class="leads-stat-val" style="color:#e2e8f0">725</div><div class="leads-stat-label">AI+自拓+商务</div></div>
@@ -853,7 +858,7 @@ body{background:#0a1628;min-height:100vh;font-family:-apple-system,BlinkMacSyste
           </table>
         </div>
         <div class="hr-desc" style="margin-top:10px;color:#64748b;font-size:10px">
-          💡 <strong>高风险定义</strong>：完成客单价&lt;¥85 或 成功率&lt;22% 或 上门率&lt;48% 的渠道。上期=5.12-5.18，本期=5.19-5.25。变化：↑上升=绿色、↓下降=红色。
+          💡 <strong>高风险定义</strong>：完成客单价&lt;¥85 或 成功率&lt;22% 或 上门率&lt;48% 的渠道。上期=5.13-5.19，本期=5.20-5.26。变化：↑上升=绿色、↓下降=红色。
         </div>
       </div>
     </div>
@@ -865,17 +870,17 @@ body{background:#0a1628;min-height:100vh;font-family:-apple-system,BlinkMacSyste
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px">
         <div class="highlight-box">
           <div class="hl-title">⚠️ 重点问题</div>
-          <div class="hl-item"><div class="hl-dot"></div><strong>价格竞争</strong>：故障恢复29.0%（17,088单，实质比价后放弃），咨询价+价格贵合计38.2%（22,466单），用户找其他9.3%</div>
-          <div class="hl-item"><div class="hl-dot"></div><strong>数据质量</strong>：地址错误3.87%、品类错误2.26%、号码错误1.43%，渠道数据待清洗</div>
-          <div class="hl-item"><div class="hl-dot"></div><strong>产品缺口</strong>：不服务品类11.56%，需扩充工程师水电/门窗覆盖</div>
-          <div class="hl-item"><div class="hl-dot"></div><strong>抖音推流</strong>：新渠道品类错误率偏高，算法推流不精准，需更新标签</div>
+          <div class="hl-item"><div class="hl-dot"></div><strong>价格竞争</strong>：故障恢复28.0%（17,088单，实质比价后放弃），价格相关(咨询+贵+不认可)合计36.9%（22,485单），用户找其他商家9.0%（5,490单），三项合计73.9%</div>
+          <div class="hl-item"><div class="hl-dot"></div><strong>数据质量</strong>：地址错误4.8%（2,899单）、品类错误2.8%（1,691单）、号码错误1.9%（1,174单），渠道数据待清洗</div>
+          <div class="hl-item"><div class="hl-dot"></div><strong>服务缺口</strong>：无法服务(客观原因无法维修+无配件材料)3.3%（2,019单），工程师人手不足1.2%（726单），需扩充覆盖</div>
+          <div class="hl-item"><div class="hl-dot"></div><strong>联系效率</strong>：无法联系用户3.1%（1,905单）+用户不定时间0.8%（516单），合计4.0%（2,421单），应优化回访时效</div>
         </div>
         <div class="highlight-box strategy">
           <div class="hl-title strategy">✅ 改进方向</div>
-          <div class="hl-item"><div class="hl-dot green"></div><strong>价格策略</strong>：输出性价比话术，设计挽留节点，目标降3个百分点</div>
-          <div class="hl-item"><div class="hl-dot green"></div><strong>数据清洗</strong>：地址错误>5%渠道二次核验；品类错误>3%渠道更新标签</div>
-          <div class="hl-item"><div class="hl-dot green"></div><strong>品类扩展</strong>：重点补充水电/门窗工程师覆盖城市</div>
-          <div class="hl-item"><div class="hl-dot green"></div><strong>区域优化</strong>：乌市/天津/北京专项补充工程师资源</div>
+          <div class="hl-item"><div class="hl-dot green"></div><strong>价格策略</strong>：价格相关占36.9%为最大可操作空间，输出性价比话术+设计挽留节点，目标降3个百分点</div>
+          <div class="hl-item"><div class="hl-dot green"></div><strong>数据清洗</strong>：地址错误4.8%为最高数据质量问题，品类错误2.8%渠道更新标签；号码错误1.9%二次核验</div>
+          <div class="hl-item"><div class="hl-dot green"></div><strong>服务覆盖</strong>：无法服务3.3%+工程师不足1.2%，重点补充工程师资源；乌鲁木齐/东莞上门率&lt;47%为急需</div>
+          <div class="hl-item"><div class="hl-dot green"></div><strong>回访时效</strong>：联系不上4.0%（2,421单），优化首次回访时效，缩短响应窗口</div>
         </div>
       </div>
       </div>
@@ -920,25 +925,25 @@ body{background:#0a1628;min-height:100vh;font-family:-apple-system,BlinkMacSyste
       <div class="leads-chart-row">
         <div class="highlight-box">
           <div class="hl-title">⚠️ 表现差城市</div>
-          <div class="hl-item"><div class="hl-dot"></div><strong>乌鲁木齐</strong>：取消率61.8%全国最高，上门率仅41.3%<span class="assignee-badge">交付组</span></div>
-          <div class="hl-item"><div class="hl-dot"></div><strong>北京</strong>：上门率46.5%倒数第二，取消率62.4%，体量大影响广<span class="assignee-badge">刘渝峰</span></div>
-          <div class="hl-item"><div class="hl-dot"></div><strong>天津</strong>：取消率60.3%，成功率仅23.6%<span class="assignee-badge">潘辰光</span></div>
-          <div class="hl-item"><div class="hl-dot"></div><strong>东莞</strong>：取消率60.6%，成功率仅23.9%<span class="assignee-badge">薛沙沙</span></div>
+          <div class="hl-item"><div class="hl-dot"></div><strong>乌鲁木齐</strong>：取消率57.9%全国最高，上门率仅42.1%，2,087单体量不小<span class="assignee-badge">交付组</span></div>
+          <div class="hl-item"><div class="hl-dot"></div><strong>东莞</strong>：取消率53.9%，上门率46.1%、成功率23.0%，2,821单<span class="assignee-badge">薛沙沙</span></div>
+          <div class="hl-item"><div class="hl-dot"></div><strong>北京</strong>：上门率46.6%倒数第二，取消率53.4%，2,513单体量大影响广<span class="assignee-badge">刘渝峰</span></div>
+          <div class="hl-item"><div class="hl-dot"></div><strong>天津</strong>：取消率51.5%，上门率48.5%、成功率24.7%<span class="assignee-badge">潘辰光</span></div>
         </div>
         <div class="highlight-box strategy">
           <div class="hl-title strategy">✅ 优秀城市</div>
-          <div class="hl-item"><div class="hl-dot green"></div><strong>重庆</strong>：上门率55.2%，成功率30.6%，综合最佳</div>
-          <div class="hl-item"><div class="hl-dot green"></div><strong>上海</strong>：上门率56.3%，成功率28.9%，体量2966单</div>
-          <div class="hl-item"><div class="hl-dot green"></div><strong>武汉</strong>：上门率57.0%，成功率29.9%</div>
-          <div class="hl-item"><div class="hl-dot green"></div><strong>沈阳</strong>：上门率58.9%，成功率31.5%</div>
+          <div class="hl-item"><div class="hl-dot green"></div><strong>武汉</strong>：上门率55.5%，成功率30.0%，综合优秀</div>
+          <div class="hl-item"><div class="hl-dot green"></div><strong>杭州</strong>：上门率55.9%，成功率31.4%，品质最佳</div>
+          <div class="hl-item"><div class="hl-dot green"></div><strong>广州</strong>：上门率54.9%，成功率27.7%，体量3,498单TOP3</div>
+          <div class="hl-item"><div class="hl-dot green"></div><strong>上海</strong>：上门率54.9%，成功率28.9%，体量3,298单</div>
         </div>
       </div>
       <div class="leads-insight">
         <div class="leads-insight-title">📋 解决策略（精简）</div>
-        <div class="leads-insight-item">1. 太原/西安/北京/乌鲁木齐：补充工程师密度（取消率>62%），临时收缩不服务品类投放 → 5.26前完成资源调配</div>
-        <div class="leads-insight-item">2. 对取消率>50%城市的渠道，推送话术优化包+城市白名单 → 本周三上线</div>
-        <div class="leads-insight-item">3. 优秀城市打法复制：重庆话术包推广至成都/西安，测试上门率提升效果 → 本周五评估</div>
-        <div class="leads-insight-item">4. 天气因素：乌鲁木齐5月沙尘暴频发，上门率下降明显；北京近期高温预警，户外安装品类取消率上升</div>
+        <div class="leads-insight-item">1. 乌鲁木齐/东莞/北京：补充工程师密度（上门率&lt;47%），临时收缩不服务品类投放 → 5.28前完成资源调配</div>
+        <div class="leads-insight-item">2. 对取消率&gt;50%城市的渠道（乌市/东莞/北京/天津/长沙），推送话术优化包+城市白名单 → 本周三上线</div>
+        <div class="leads-insight-item">3. 优秀城市打法复制：杭州话术包推广至成都/西安，测试上门率提升效果 → 本周五评估</div>
+        <div class="leads-insight-item">4. 价格相关取消占36.9%为最大可操作空间，优先在高取消城市测试性价比挽留话术</div>
       </div>
       </div>
       </div>
@@ -990,13 +995,13 @@ body{background:#0a1628;min-height:100vh;font-family:-apple-system,BlinkMacSyste
     <div class="summary-grid">
       <div class="summary-card sc-blue">
         <div class="sc-label">总目标完成率</div>
-        <div class="sc-val" style="color:#60a5fa" id="sum-rate">78.5%</div>
-        <div class="sc-sub kpi-down" id="sum-rate-sub">↓ 剩余29,306单 | 日均需4,187单</div>
+        <div class="sc-val" style="color:#60a5fa" id="sum-rate">87.6%</div>
+        <div class="sc-sub kpi-up" id="sum-rate-sub">↑ 剩余16,919单 | 日均需3,384单（当前日均4,595）</div>
       </div>
       <div class="summary-card sc-amber">
         <div class="sc-label">高风险城市</div>
-        <div class="sc-val" style="color:#fbbf24" id="sum-risk-city">5个</div>
-        <div class="sc-sub kpi-neutral" id="sum-risk-city-sub">太原/西安/北京/乌鲁木齐/东莞</div>
+        <div class="sc-val" style="color:#fbbf24" id="sum-risk-city">4个</div>
+        <div class="sc-sub kpi-neutral" id="sum-risk-city-sub">乌鲁木齐/东莞/北京/天津</div>
       </div>
       <div class="summary-card sc-purple">
         <div class="sc-label">渠道拓展进度</div>
@@ -1012,30 +1017,30 @@ body{background:#0a1628;min-height:100vh;font-family:-apple-system,BlinkMacSyste
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
         <div>
           <div class="issue-item">
-            <strong>【问题1】目标达成风险</strong><br>
-            完成率78.5%，日均需4,187单。本周环比-5.1%（老渠道-8.8%）需警惕<br>
-            <em>策略①</em>：扶持煜志/小补快，新渠道占比提至16%<br>
-            <em>策略②</em>：成都/上海/苏州加大老渠道推广
+            <strong>【问题1】目标达成压力可控</strong><br>
+            完成率87.6%，剩余5天16,919单（日均3,384），当前日均4,595超达标线35.8%，5.26单日6,989创新高<br>
+            <em>策略①</em>：保持当前投放节奏，重点优化质量指标<br>
+            <em>策略②</em>：成都/上海/苏州加大老渠道推广，确保最后5天冲刺
           </div>
           <div class="issue-item">
-            <strong>【问题2】新渠道质量偏低</strong><br>
-            成功率偏低，新渠道逆势+17.5%但老渠道-8.8%拖累大盘。抖音规则变化致流量波动<br>
+            <strong>【问题2】渠道质量分化严重</strong><br>
+            TOP10中4家成功率&lt;22%（我唱20.9%/一诺21.3%/煜志21.6%/吉时雨20.6%），有祥广告上门率44.5%为TOP5最低。武汉亲益冠逆势增长(63.1%/37.0%)证明高质量模式可行<br>
             <em>策略①</em>：定制抖音投放SOP，避开不服务品类<br>
-            <em>策略②</em>：上门率<48%立即干预
+            <em>策略②</em>：上门率&lt;48%立即干预，复制武汉亲益冠模式
           </div>
         </div>
         <div>
           <div class="issue-item">
             <strong>【问题3】城市交付不均</strong><br>
-            太原65.0%/西安64.2%/北京62.4%/乌市61.8%取消率偏高，工程师密度不足<br>
-            <em>策略①</em>：补充北京/乌市/天津工程师，取消率降至55%以下<br>
+            乌鲁木齐57.9%/东莞53.9%/北京53.4%/天津51.5%取消率偏高，乌鲁木齐上门率42.1%最低<br>
+            <em>策略①</em>：补充乌鲁木齐/东莞工程师密度，上门率提至50%以上<br>
             <em>策略②</em>：高取消城市临时收缩投放品类
           </div>
           <div class="issue-item">
-            <strong>【问题4】产品结构负增长</strong><br>
-            热水器-15%/疏通-6%/电视-0.8%，合计13%全线下跌<br>
-            <em>策略①</em>：热水器/疏通重点城市专项推广<br>
-            <em>策略②</em>：不服务品类高的渠道调整投流优先级
+            <strong>【问题4】取消率结构待优化</strong><br>
+            价格相关36.9%(22,485单)+故障恢复28.0%(17,088单)+用户找其他9.0%(5,490单)三项合计73.9%，为最大可操作空间<br>
+            <em>策略①</em>：价格相关占36.9%，输出性价比话术+设计挽留节点<br>
+            <em>策略②</em>：数据质量待提升：地址错误4.8%、品类错误2.8%
           </div>
         </div>
       </div>
@@ -1055,7 +1060,7 @@ body{background:#0a1628;min-height:100vh;font-family:-apple-system,BlinkMacSyste
           </div>
           <div class="issue-item">
             <strong>【发现3】家装线索最大存量</strong><br>
-            32条家装中26条待跟进(5.8集中登记)，转化潜力最大<br>
+            家装类线索待跟进转化潜力最大<br>
             <em>建议</em>：本周统一建联，目标转化5家
           </div>
           <div class="issue-item">
@@ -1076,41 +1081,41 @@ body{background:#0a1628;min-height:100vh;font-family:-apple-system,BlinkMacSyste
           <tr><th>指标</th><th>当前值</th><th>目标值</th><th>偏差</th><th>环比变化</th><th>状态</th><th>负责人</th></tr>
         </thead>
         <tbody id="monitor-tbody">
-          <tr><td><strong>总目标完成率</strong></td><td id="mt-rate">78.5%</td><td>100%</td><td id="mt-rate-diff">-21.5%</td><td class="metric-down" id="mt-rate-mom">↓ 周-5.1%</td><td><span class="tag tag-warn" id="mt-rate-tag"><span class="status-dot dot-warn"></span>警告</span></td><td>运营组</td></tr>
-          <tr><td><strong>新渠道完成率</strong></td><td id="mt-new-rate">76.2%</td><td>100%</td><td id="mt-new-diff">-23.8%</td><td class="metric-neutral" id="mt-new-mom">— 持平</td><td><span class="tag tag-warn" id="mt-new-tag"><span class="status-dot dot-warn"></span>警告</span></td><td>渠道组</td></tr>
-          <tr><td><strong>老渠道完成率</strong></td><td id="mt-old-rate">79.0%</td><td>100%</td><td id="mt-old-diff">-21.0%</td><td class="metric-down" id="mt-old-mom">↓ 周-5.3%</td><td><span class="tag tag-warn" id="mt-old-tag"><span class="status-dot dot-warn"></span>警告</span></td><td>渠道组</td></tr>
-          <tr><td><strong>平均上门率</strong></td><td id="mt-ar">53.7%</td><td>65%</td><td id="mt-ar-diff">-11.3%</td><td class="metric-neutral" id="mt-ar-mom">— 持平</td><td><span class="tag tag-warn" id="mt-ar-tag"><span class="status-dot dot-warn"></span>警告</span></td><td>运营组</td></tr>
-          <tr><td><strong>平均成功率</strong></td><td id="mt-sr">27.7%</td><td>40%</td><td id="mt-sr-diff">-12.3%</td><td class="metric-neutral" id="mt-sr-mom">— 持平</td><td><span class="tag tag-danger" id="mt-sr-tag"><span class="status-dot dot-danger"></span>危险</span></td><td>交付组</td></tr>
-          <tr><td><strong>完成客单价</strong></td><td id="mt-up">¥96.50</td><td>¥110</td><td id="mt-up-diff">-¥13.50</td><td class="metric-neutral" id="mt-up-mom">— 持平</td><td><span class="tag tag-warn" id="mt-up-tag"><span class="status-dot dot-warn"></span>偏低</span></td><td>产品组</td></tr>
+          <tr><td><strong>总目标完成率</strong></td><td id="mt-rate">87.6%</td><td>100%</td><td id="mt-rate-diff">-12.4%</td><td class="metric-up" id="mt-rate-mom">↑ 近7天+13.8%</td><td><span class="tag tag-ok" id="mt-rate-tag"><span class="status-dot dot-ok"></span>良好</span></td><td>运营组</td></tr>
+          <tr><td><strong>新渠道完成率</strong></td><td id="mt-new-rate">85.0%</td><td>100%</td><td id="mt-new-diff">-15.0%</td><td class="metric-up" id="mt-new-mom">↑ 增长中</td><td><span class="tag tag-ok" id="mt-new-tag"><span class="status-dot dot-ok"></span>良好</span></td><td>渠道组</td></tr>
+          <tr><td><strong>老渠道完成率</strong></td><td id="mt-old-rate">88.1%</td><td>100%</td><td id="mt-old-diff">-11.9%</td><td class="metric-up" id="mt-old-mom">↑ 近7天+13.8%</td><td><span class="tag tag-ok" id="mt-old-tag"><span class="status-dot dot-ok"></span>良好</span></td><td>渠道组</td></tr>
+          <tr><td><strong>平均上门率</strong></td><td id="mt-ar">52.6%</td><td>65%</td><td id="mt-ar-diff">-12.4%</td><td class="metric-neutral" id="mt-ar-mom">— 持平</td><td><span class="tag tag-warn" id="mt-ar-tag"><span class="status-dot dot-warn"></span>警告</span></td><td>运营组</td></tr>
+          <tr><td><strong>平均成功率</strong></td><td id="mt-sr">27.8%</td><td>40%</td><td id="mt-sr-diff">-12.2%</td><td class="metric-neutral" id="mt-sr-mom">— 持平</td><td><span class="tag tag-danger" id="mt-sr-tag"><span class="status-dot dot-danger"></span>危险</span></td><td>交付组</td></tr>
+          <tr><td><strong>完成客单价</strong></td><td id="mt-up">¥94.47</td><td>¥110</td><td id="mt-up-diff">-¥15.53</td><td class="metric-neutral" id="mt-up-mom">— 持平</td><td><span class="tag tag-warn" id="mt-up-tag"><span class="status-dot dot-warn"></span>偏低</span></td><td>产品组</td></tr>
           <tr><td><strong>渠道拓展</strong></td><td id="mt-expand">4/6家</td><td>6家</td><td id="mt-expand-diff">-2家</td><td class="metric-neutral" id="mt-expand-mom">— 持平</td><td><span class="tag tag-warn" id="mt-expand-tag"><span class="status-dot dot-warn"></span>推进中</span></td><td>商务组</td></tr>
-          <tr><td><strong>乌鲁木齐取消率</strong></td><td id="mt-wlmq">58.63%</td><td>45%</td><td id="mt-wlmq-diff">+13.63%</td><td class="metric-down" id="mt-wlmq-mom">↑ 持续高位</td><td><span class="tag tag-danger" id="mt-wlmq-tag"><span class="status-dot dot-danger"></span>危险</span></td><td>交付组</td></tr>
+          <tr><td><strong>乌鲁木齐取消率</strong></td><td id="mt-wlmq">57.9%</td><td>45%</td><td id="mt-wlmq-diff">+12.9%</td><td class="metric-down" id="mt-wlmq-mom">↑ 持续高位</td><td><span class="tag tag-danger" id="mt-wlmq-tag"><span class="status-dot dot-danger"></span>危险</span></td><td>交付组</td></tr>
         </tbody>
       </table>
     </div>
     
     <!-- 下周行动计划 -->
-    <div style="font-size:13px;font-weight:600;color:#cbd5e1;margin:16px 0 8px">📅 本周行动计划</div>
+    <div style="font-size:13px;font-weight:600;color:#cbd5e1;margin:16px 0 8px">📅 本周行动计划（5.27-5.31）</div>
     <div class="week-grid">
       <div class="week-card">
         <div class="week-day">周一/周二</div>
-        <div class="week-item">宜昌玖源加投成都/乌市<span class="assignee-badge">刘渝峰</span></div>
-        <div class="week-item">水电/门窗推广加强方案<span class="assignee-badge">潘辰光</span></div>
-        <div class="week-item">北京/天津补充工程师<span class="assignee-badge">交付组</span></div>
-        <div class="week-item">抖音投流SOP制定<span class="assignee-badge">潘辰光</span></div>
+        <div class="week-item">5月最后冲刺：日均3,384单即可达标，保持当前5,000+节奏<span class="assignee-badge">运营组</span></div>
+        <div class="week-item">乌鲁木齐/东莞补充工程师资源<span class="assignee-badge">交付组</span></div>
+        <div class="week-item">高取消率城市话术包上线（乌市/东莞/北京/天津）<span class="assignee-badge">客服组</span></div>
+        <div class="week-item">有祥广告上门率专项排查（44.5%为TOP5最低）<span class="assignee-badge">潘辰光</span></div>
       </div>
       <div class="week-card">
         <div class="week-day">周三</div>
-        <div class="week-item">煜志聚焦一线投放<span class="assignee-badge">潘辰光</span></div>
-        <div class="week-item">热水器/疏通推广策略<span class="assignee-badge">刘渝峰</span></div>
-        <div class="week-item">渠道第5家洽谈<span class="assignee-badge">薛沙沙</span></div>
-        <div class="week-item">取消率复盘会<span class="assignee-badge">运营组</span></div>
+        <div class="week-item">煜志网络/吉时雨/一诺上门率提升方案输出<span class="assignee-badge">潘辰光</span></div>
+        <div class="week-item">武汉亲益冠模式总结+复制推广<span class="assignee-badge">刘渝峰</span></div>
+        <div class="week-item">渠道拓展第5家洽谈<span class="assignee-badge">薛沙沙</span></div>
+        <div class="week-item">价格挽留话术A/B测试（目标降3个百分点）<span class="assignee-badge">运营组</span></div>
       </div>
       <div class="week-card">
         <div class="week-day">周四/周五</div>
-        <div class="week-item">渠道第6家跟进<span class="assignee-badge">薛沙沙</span></div>
-        <div class="week-item">高取消城市话术上线<span class="assignee-badge">客服组</span></div>
-        <div class="week-item">周复盘+策略效果评估<span class="assignee-badge">运营组</span></div>
-        <div class="week-item">下周目标分解+日追踪<span class="assignee-badge">运营组</span></div>
+        <div class="week-item">渠道拓展第6家跟进<span class="assignee-badge">薛沙沙</span></div>
+        <div class="week-item">5月数据复盘+6月目标制定<span class="assignee-badge">运营组</span></div>
+        <div class="week-item">数据清洗：地址错误>5%渠道二次核验<span class="assignee-badge">渠道组</span></div>
+        <div class="week-item">月度总结报告+策略效果评估<span class="assignee-badge">运营组</span></div>
       </div>
     </div>
 
@@ -1123,10 +1128,10 @@ body{background:#0a1628;min-height:100vh;font-family:-apple-system,BlinkMacSyste
       <div class="ai-panel-body" id="ai-panel-body-4">
         <div class="ai-model-bar" id="ai-model-bar-4"></div>
         <div class="ai-results-area" id="ai-results-4">
-          <div class="ai-item"><strong>目标缺口</strong>：剩余7天需完成29,306单，日均需4,187单（当前4,462单/天）。保持当前节奏即可超额1,925单，但本周环比-5.1%需警惕</div>
-          <div class="ai-item"><strong>最大杠杆点</strong>：取消率54.9%偏高，每降低1%取消率≈增加1,070单。故障恢复+价格因素合计64.9%是最大可操作空间。太原/西安/北京/乌市四城工程师密度补充可额外贡献约900单</div>
-          <div class="ai-item"><strong>风险预警</strong>：①周环比-5.1%为近两周首次显著下滑，需追溯流量来源变化；②采买类占比92.2%过高，头部渠道波动将直接影响目标达成；③新渠道成功率偏低，煜志网络/吉时雨需专项帮扶</div>
-          <div class="ai-item"><strong>本周优先级</strong>：①新渠道+17.5%增长势头好，加大投放扶持；老渠道-8.8%需重点排查下滑原因 ②吉时雨/一诺家电上门率提升专项 ③家装线索集中建联 ④太原/西安工程师补充（取消率>64%）⑤抖音话术SOP更新<span class="assignee-badge">运营组</span></div>
+          <div class="ai-item"><strong>目标缺口</strong>：剩余5天需完成16,919单，日均需3,384单（当前日均4,595单/天，最近5天日均5,739）。保持当前节奏可超额约11,776单完成月度目标。5.26单日6,989创新高，月度冲刺态势良好</div>
+          <div class="ai-item"><strong>最大杠杆点</strong>：取消率47.4%仍有优化空间，每降低1%取消率≈增加1,200单。价格相关36.9%(22,485单)+故障恢复28.0%(17,088单)合计64.9%是最大可操作空间。乌鲁木齐/东莞上门率最低，工程师补充可额外贡献约600单</div>
+          <div class="ai-item"><strong>风险预警</strong>：①推广类占比91.8%过高，行业结构单一风险需关注；②TOP10中4家成功率&lt;22%，渠道质量分化严重；③乌鲁木齐取消率57.9%持续高位，需紧急干预；④客单价¥94.47偏低（目标¥110），需提升高客单品类占比</div>
+          <div class="ai-item"><strong>本月优先级</strong>：①保持投放节奏确保目标达成（日均3,384即可）②价格挽留话术测试（36.9%空间）③武汉亲益冠模式复制（63.1%上门率标杆）④乌鲁木齐工程师紧急补充 ⑤有祥广告上门率专项排查<span class="assignee-badge">运营组</span></div>
         </div>
         <div class="ai-retry-bar" id="ai-retry-bar-4" style="display:none"></div>
       </div>
@@ -2093,12 +2098,23 @@ async function callModelAPI(model, context, prompt) {
 
 // =================== 初始化 ===================
 function init() {
-  populateFilters();
-  renderAll();
-  renderLeadsPanel();
-  window.onresize = function() {
-    for (var k in charts) { if(charts[k]) charts[k].resize(); }
-  };
+  try {
+    console.log('=== INIT START ===');
+    console.log('echarts:', typeof echarts);
+    console.log('CHANNELS:', typeof CHANNELS, CHANNELS ? CHANNELS.length : 'N/A');
+    console.log('DAILY:', typeof DAILY, DAILY ? DAILY.labels ? DAILY.labels.length : 'NO LABELS' : 'N/A');
+    console.log('=== INIT PROCEEDING ===');
+    populateFilters();
+    renderAll();
+    renderLeadsPanel();
+    window.onresize = function() {
+      for (var k in charts) { if(charts[k]) charts[k].resize(); }
+    };
+    console.log('=== INIT COMPLETE ===');
+  } catch(e) {
+    console.error('[init ERROR]', e);
+    document.body.innerHTML = '<div style="color:red;padding:40px;font-size:18px">初始化错误: ' + e.message + '<br><pre>' + e.stack + '</pre></div>';
+  }
 }
 
 function populateFilters() {
@@ -2249,21 +2265,27 @@ function renderKPI() {
 
 // =================== 渲染全部 ===================
 function renderAll() {
-  updateGoalCards();
-  renderKPI();
-  initDailyChart();
-  renderTop10();
-  renderChannelTable();
-  renderChannelRankList();
-  if (hrExpanded) renderHighRiskChannels();
-  renderIndustryTable();
-  renderCityTable();
-  initCancelChart();
-  initVoiceChart();
-  initProductChart();
-  updateSummaryCards();
-  updateMonitorTable();
-  updateAnalysisScope();
+  try {
+    console.log('[renderAll] start');
+    updateGoalCards(); console.log('[renderAll] updateGoalCards done');
+    renderKPI(); console.log('[renderAll] renderKPI done');
+    initDailyChart(); console.log('[renderAll] initDailyChart done');
+    renderTop10(); console.log('[renderAll] renderTop10 done');
+    renderChannelTable(); console.log('[renderAll] renderChannelTable done');
+    renderChannelRankList(); console.log('[renderAll] renderChannelRankList done');
+    if (hrExpanded) renderHighRiskChannels();
+    renderIndustryTable(); console.log('[renderAll] renderIndustryTable done');
+    renderCityTable(); console.log('[renderAll] renderCityTable done');
+    initCancelChart(); console.log('[renderAll] initCancelChart done');
+    initVoiceChart(); console.log('[renderAll] initVoiceChart done');
+    initProductChart(); console.log('[renderAll] initProductChart done');
+    updateSummaryCards(); console.log('[renderAll] updateSummaryCards done');
+    updateMonitorTable(); console.log('[renderAll] updateMonitorTable done');
+    updateAnalysisScope(); console.log('[renderAll] updateAnalysisScope done');
+    console.log('[renderAll] complete');
+  } catch(e) {
+    console.error('[renderAll ERROR]', e);
+  }
 }
 
 // =================== 线索统计条（已移除） ===================
@@ -2432,7 +2454,7 @@ function initDailyChart() {
 
 // =================== TOP10（表格模式+周环比） ===================
 function getWeeklyChange() {
-  // DAILY数据25天(5.1-5.25)，最近一周=5.19-5.25(索引18-24)，上一周=5.12-5.18(索引11-17)
+  // DAILY数据26天(5.1-5.26)，最近一周=5.20-5.26(索引19-25)，上一周=5.13-5.19(索引12-18)
   if (typeof DAILY === 'undefined' || !DAILY.total || DAILY.total.length < 24) return {change: 0, pct: '—', trend: 'neutral'};
   var thisWeek = 0, lastWeek = 0;
   for (var i = 17; i < 24; i++) thisWeek += DAILY.total[i];
@@ -2659,7 +2681,7 @@ function renderTop10() {
   avgUP = (avgUP / top10.length).toFixed(2);
   
   html += '<tr style="background:rgba(59,130,246,0.06);border-top:2px solid rgba(59,130,246,0.25)">';
-  html += '<td colspan="4" style="font-weight:600;color:#60a5fa;font-size:11px">📈 近一周汇总 (5.19-5.25)</td>';
+  html += '<td colspan="4" style="font-weight:600;color:#60a5fa;font-size:11px">📈 近一周汇总 (' + (DAILY.labels.length >= 7 ? DAILY.labels.slice(-7)[0].replace('2026-','5.') + '-' + DAILY.labels[DAILY.labels.length-1].replace('2026-','5.') : '近7天') + ')</td>';
   html += '<td style="font-weight:700;color:#e2e8f0">' + thisWeekTotal.toLocaleString() + '<br><span style="color:' + totalChgColor + ';font-size:10px">' + totalArrow + ' ' + totalSign + Math.abs(totalChg).toLocaleString() + ' vs上周</span></td>';
   html += '<td style="font-size:11px;color:#94a3b8">均' + avgAR + '%</td>';
   html += '<td style="font-size:11px;color:#94a3b8">均' + avgSR + '%</td>';
@@ -2844,8 +2866,14 @@ function renderHighRiskChannels() {
   var avgUP = active.filter(function(c){return c.unitPrice < 85;}).reduce(function(s,c){return s+c.unitPrice;},0);
   avgUP = totalHRCount > 0 ? (avgUP/totalHRCount).toFixed(2) : '—';
   var allAvgUP = active.reduce(function(s,c){return s+c.unitPrice;},0) / active.length;
+  // 先计算上期时间范围（不要放在innerHTML里，script标签不会执行！）
+  var prevPeriodRange = '';
+  if(typeof DAILY !== "undefined" && DAILY.labels && DAILY.labels.length >= 14) {
+    var last14 = DAILY.labels.slice(-14);
+    prevPeriodRange = last14[0].replace("2026-","5.") + "-" + last14[6].replace("2026-","5.");
+  }
   document.getElementById('hr-summary').innerHTML = 
-    '当前共识别 <strong>' + highRisk.length + '</strong> 个高风险渠道（客单价低' + totalHRCount + '个·均¥' + avgUP + ' | 成功率低' + totalSRCount + '个 | 上门率低' + totalARCount + '个）。全渠道均客单价¥' + allAvgUP.toFixed(2) + '，低于均值的渠道占比' + (totalHRCount/active.length*100).toFixed(0) + '%。<br>⚠️ 相比上期(5.11-5.17)，本周总单量变化 <strong style="color:'+(pd.totalChange>=0?'#34d399':'#f87171')+'">'+(pd.totalChange>=0?'+':'')+pd.totalChange.toLocaleString()+'单</strong>，需重点关注以下渠道的恶化趋势。';
+    '当前共识别 <strong>' + highRisk.length + '</strong> 个高风险渠道（客单价低' + totalHRCount + '个·均¥' + avgUP + ' | 成功率低' + totalSRCount + '个 | 上门率低' + totalARCount + '个）。全渠道均客单价¥' + allAvgUP.toFixed(2) + '，低于均值的渠道占比' + (totalHRCount/active.length*100).toFixed(0) + '%。<br>⚠️ 相比上期(<span id="prev-period-range">' + prevPeriodRange + '</span>)，本周总单量变化 <strong style="color:'+(pd.totalChange>=0?'#34d399':'#f87171')+'">'+(pd.totalChange>=0?'+':'')+pd.totalChange.toLocaleString()+'单</strong>，需重点关注以下渠道的恶化趋势。';
 
   // 渲染表格
   var html = '';
@@ -3423,6 +3451,18 @@ function updateAnalysisScope() {
 }
 
 // =================== 启动 ===================
+// 临时测试按钮
+var testBtn = document.createElement('button');
+testBtn.textContent = '📊 测试加载状态';
+testBtn.style = 'position:fixed;top:10px;right:10px;z-index:9999;padding:10px;background:#f00;color:#fff;cursor:pointer';
+testBtn.onclick = function() {
+  alert('CHANNELS: ' + typeof CHANNELS + (CHANNELS ? ', len=' + CHANNELS.length : '') +
+       '\nDAILY: ' + typeof DAILY + (DAILY ? ', len=' + (DAILY.labels ? DAILY.labels.length : 'no labels') : '') +
+       '\nECHARTS: ' + typeof echarts);
+};
+document.body.appendChild(testBtn);
+
+// 启动
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', init);
 } else {
